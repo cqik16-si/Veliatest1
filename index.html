@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velia MVP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="screen">
+        <div class="login-box">
+            <h2>Velia</h2>
+            <p style="color:#666; margin-bottom: 30px; font-size: 14px;">Connect with people nearby</p>
+            <button id="btn-google-login" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                <span>Sign in with Google</span>
+            </button>
+            <p id="login-error" class="error-text"></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="app-screen" class="screen hidden">
+        
+        <!-- HEADER -->
+        <header>
+            <div class="profile-container" onclick="toggleProfileMenu()">
+                <div id="header-avatar" class="avatar-circle">User</div>
+                
+                <!-- Dropdown Menu -->
+                <div id="profile-dropdown" class="dropdown-menu hidden">
+                    <div class="dropdown-item" onclick="openEditProfileModal()">Edit Profile</div>
+                    <div class="dropdown-item" onclick="openFollowingModal()">Following</div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item logout-item" onclick="handleLogout()">Logout</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-container">
+            <!-- VIEWS -->
+            <div id="view-home" class="view-section">
+                <div id="invite-list"></div>
+            </div>
+            <div id="view-plan" class="view-section hidden">
+                <div id="plan-list"></div>
+            </div>
+            <div id="view-chat-list" class="view-section hidden">
+                <div id="chat-list-container"></div>
+            </div>
+            
+            <!-- FULL SCREEN CHAT -->
+            <div id="view-chat" class="view-section hidden">
+                <div class="chat-header">
+                    <button id="btn-back-chat">← Back</button>
+                    <span id="chat-title">Chat</span>
+                    <div class="header-actions">
+                        <button id="btn-follow-chat" class="btn-follow-header" style="display:none;">Follow</button>
+                        <button id="btn-delete-chat" class="btn-delete-chat">Clear</button>
+                    </div>
+                </div>
+                <div id="chat-messages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="msg-input" placeholder="Type a message..." />
+                    <button id="btn-send">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-create-fab" class="fab">+</button>
+
+        <!-- BOTTOM NAV -->
+        <nav id="bottom-nav" class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('home')">Home</div>
+            <div class="nav-item" onclick="switchTab('plan')">My Plan</div>
+            <div class="nav-item" onclick="switchTab('chat')">Chat</div>
+        </nav>
+    </div>
+
+    <!-- MODAL: CREATE INVITE -->
+    <div id="create-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create Invite</h3>
+            <input type="text" id="new-title" placeholder="Topic (e.g., Coffee)" />
+            <label style="font-size:12px; color:#888;">Date & Time:</label>
+            <input type="datetime-local" id="new-date" />
+            <div class="modal-actions">
+                <button id="btn-cancel-create" class="btn-secondary">Cancel</button>
+                <button id="btn-save-invite" class="btn-primary">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: EDIT PROFILE -->
+    <div id="edit-profile-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Edit Profile</h3>
+            <input type="text" id="edit-username-input" placeholder="Username" />
+            <textarea id="edit-bio-input" rows="3" placeholder="Tell us about yourself..."></textarea>
+            <p id="edit-profile-error" class="error-text"></p>
+            <div class="modal-actions">
+                <button id="btn-cancel-edit-profile" class="btn-secondary">Cancel</button>
+                <button id="btn-save-edit-profile" class="btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: VIEW PROFILE -->
+    <div id="view-profile-modal" class="modal hidden">
+        <div class="modal-content center-content">
+            <div class="profile-view-avatar">U</div>
+            <h3 id="view-profile-name">Username</h3>
+            <p id="view-profile-bio" class="profile-bio">User Bio goes here...</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeViewProfile()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: FOLLOWING LIST -->
+    <div id="following-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Following</h3>
+                <button class="btn-close-modal" onclick="closeFollowingModal()">✕</button>
+            </div>
+            <div id="following-list-container">
+                <!-- List items will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
