@@ -5,7 +5,7 @@ import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://ww
 
 // --- CONFIG ---
 const firebaseConfig = {
-     apiKey: "",
+     apiKey: "YOUR_API_KEY_HERE"
   authDomain: "veliareal.firebaseapp.com",
   projectId: "veliareal",
   storageBucket: "veliareal.firebasestorage.app",
@@ -461,3 +461,4 @@ document.getElementById('btn-send').onclick = async () => {
 window.deleteMessage = function(msgKey) { if(confirm("Delete this message?")) remove(ref(db, 'messages/' + currentChatId + '/' + msgKey)); }
 
 document.getElementById('btn-delete-chat').onclick = function() { if(confirm("Clear entire conversation history?")) { remove(ref(db, 'messages/' + currentChatId)); document.getElementById('chat-messages').innerHTML = ""; } }
+
